@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+    <title>Attendence page</title>
+   <!--Made with love by Mutiullah Samim -->
+   
+    <!--Bootsrap 4 CDN-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!--Custom styles-->
+        {% load static %}
+            <link rel="stylesheet" type="text/css" href="{% static '/styles.css' %}">
+</head>
+<body>
+<div class="container">
+    <div class="d-flex justify-content-center h-100">
+        <div class="card">
+            <div class="card-header">
+                <h3>Mark Your Attendene</h3>
+                <div class="d-flex justify-content-end social_icon">
+                    <span><i class="fab fa-facebook-square"></i></span>
+                    <span><i class="fab fa-google-plus-square"></i></span>
+                    <span><i class="fab fa-twitter-square"></i></span>
+                </div>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="name">
+                        
+                    </div>      
+
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                        </div>
+                        <input type="number" class="form-control" placeholder="phone number">
+                        
+                    </div>
+            <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class=" fas fa-male"></i></span>
+                        </div>
+                        <input type="number" class="form-control" placeholder="age ">
+                       
+                    </div>
+
+            <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class=" fas fa-calendar-alt"></i></span>
+                        </div>
+                        <input type="date "  data-date-format="DD MMMM YYYY" class="input-group-text"  onfocus="(this.type='date')"placeholder="Register date" id="Registerdate">
+                        
+                    </div>
+                    <script type="text/javascript">
+var today = new Date(); 
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = mm + '/' + dd + '/' + yyyy;
+document.getElementById('Registerdate').value=today
+                    </script>>
+
+       <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class=" fas fa-male"></i></span>
+                        </div>
+                        <input type="number" id="noofmonths" class="form-control" placeholder="months of registration " onclick="setendingdate()">
+                       
+                    </div>
+                    <script type="text/javascript">
+                        function setendingdate(){
+a=document.getElementById("Registerdate").value
+d = new Date(a)
+d.setMonth(document.getElementById("noofmonths").value)
+
+var dd = String(d.getDate()).padStart(2, '0');
+var mm = String(d.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = d.getFullYear();
+
+document.getElementById("endingdate").value=mm+'/'+dd+'/'+yyyy
+console.log(d)
+
+
+       //document.write(dt)
+
+
+                        }
+                    </script>>
+
+            <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                        </div>
+                        <input type="text"   class="input-group-text" onfocus="(this.type='date')" placeholder="Ending date"
+                        disabled="true" id="endingdate">
+                        
+                    </div>
+            
+                    
+                    <div class="form-group">
+                        <input type="submit" value="Attendene" class="btn float-right login_btn ">
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-center links">
+                    Register new member (Admin) <a href="#">Regester</a>
+                </div>
+                <div class="d-flex justify-content-center">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
