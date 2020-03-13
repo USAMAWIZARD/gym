@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from gymattendeceapp import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('mark/',views.markattendence),
     path('register/',views.register),
+    path('registeruserdata/',views.registeruserdata),
 ]
