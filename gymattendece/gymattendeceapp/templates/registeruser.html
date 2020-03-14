@@ -47,7 +47,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-phone"></i></span>
                         </div>
-                        <input type="number" class="form-control" placeholder="phone number" required="true" name="number">
+                        <input type="text" class="form-control" placeholder="phone number" required="true" name="number">
                         
                     </div>
             <div class="input-group form-group">
@@ -62,13 +62,13 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class=" fas fa-calendar-alt"></i></span>
                         </div>
-                        <input type="date "  data-date-format="DD MMMM YYYY" class="input-group-text"  onfocus="(this.type='date')"placeholder="Register date" id="Registerdate" name="joiningdate">
+                        <input type="date "   class="input-group-text"  onfocus="(this.type='date')"placeholder="Register date" id="Registerdate" name="joiningdate">
                         
                     </div>
                     <script type="text/javascript">
 var today = new Date(); 
 var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var mm = String(today.getMonth() + 1).padStart(2, '0'); 
 var yyyy = today.getFullYear();
 
 today = mm + '/' + dd + '/' + yyyy;

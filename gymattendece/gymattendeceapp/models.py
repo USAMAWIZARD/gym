@@ -4,9 +4,9 @@ from django.db import models
 class gym(models.Model):
     name = models.CharField(max_length=255)
     age = models.IntegerField()
-    phoneno = models.IntegerField()
-    joiningdate = models.DateField(blank=True, null=True)
-    endingdate = models.DateField(blank=True, null=True)
+    phoneno = models.CharField(max_length=11)
+    joiningdate = models.CharField(max_length=255)
+    endingdate = models.CharField(max_length=255)
 class admin(models.Model):
 	adminname = models.CharField(max_length=255)
 	adminpass = models.CharField(max_length=255)
