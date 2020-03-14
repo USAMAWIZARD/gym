@@ -71,9 +71,9 @@ var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); 
 var yyyy = today.getFullYear();
 
-today = mm + '/' + dd + '/' + yyyy;
-document.getElementById('Registerdate').value=today
-                    </script>>
+
+document.getElementById('Registerdate').value= mm + '-' + dd + '-' + yyyy;
+                    </script>
 
        <div class="input-group form-group">
                         <div class="input-group-prepend">
@@ -85,15 +85,15 @@ document.getElementById('Registerdate').value=today
                     <script type="text/javascript">
                         function setendingdate(){
 a=document.getElementById("Registerdate").value
-d = new Date(a)
-d.setMonth(document.getElementById("noofmonths").value)
-
+var d = new  Date(a)
+d.setMonth(parseInt(document.getElementById("noofmonths").value)+parseInt(d.getMonth()))    
+console.log(today.getMonth())
 var dd = String(d.getDate()).padStart(2, '0');
-var mm = String(d.getMonth() + 1).padStart(2, '0'); //January is 0!
+var mm = String(d.getMonth() + 1 ).padStart(2, '0'); 
 var yyyy = d.getFullYear();
 
-document.getElementById("endingdate").value=mm+'/'+dd+'/'+yyyy
-console.log(d)
+document.getElementById("endingdate").value=mm+'-'+dd+'-'+yyyy
+console.log(d.getMonth())
 
 
        //document.write(dt)

@@ -84,8 +84,7 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-
-DATE_FORMAT = "d-m-Y"
+DATE_INPUT_FORMATS = ['%m-%d-%Y']
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 

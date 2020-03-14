@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('mark/',views.markattendence),
     path('register/',views.register),
+    path('dateindb/',views.adddateindb),
     path('registeruserdata/',views.registeruserdata),
 ]
