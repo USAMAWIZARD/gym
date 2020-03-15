@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import gym,attendence
 import datetime 
+from django.db import connection, transaction	
 import calendar
 def markattendence(request):
 	return render(request,"markattendence.html")
@@ -26,10 +27,25 @@ def registeruserdata(request):
 	gy.endingdate=end
 	gy.save()
 	return render(request,"registeruser.html")
-def adddateindb(request):
+
+
+
+def markuserattendence(request):
+	ifdateexist=attendence.objects.filter(date=datetime.date.today().strftime("%Y-%m-%d")).count()
+	todaydate=datetime.date.today().strftime("%Y-%m-%d")
 	a=attendence()
-	b=attendence.objects.raw("select date from a where date="+datetime.date.today().strftime("%Y-%m-%d"))
-	if attendence.objects.all().count()<1:
-		a.date=str=datetime.date.today().strftime("%Y-%m-%d")
+
+
+	try:
+		i=attendence.objects.get(date=todaydate)
+	except:
+		a.date=str(datetime.date.today().strftime("%Y-%m-%d"))
+		
+		a.status=request.POST["gymid"]	
 		a.save()
+		return redirect('/mark/')
+	i.status=i.status+','+request.POST["gymid"]
+	i.save()
 	return redirect("/mark/")
+	 
+	

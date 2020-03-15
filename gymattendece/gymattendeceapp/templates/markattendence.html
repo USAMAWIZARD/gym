@@ -34,12 +34,13 @@
 				</div>
 			</div>
 			<div class="card-body">
-				<form>
+				<form action="/markuserattendence/" method="POST">
+					{% csrf_token %}
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-prepend-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="gymid">
+						<input type="text" name="gymid" class="form-control" placeholder="gymid">
 						
 					</div>
 			

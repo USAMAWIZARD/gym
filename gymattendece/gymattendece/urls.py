@@ -20,7 +20,9 @@ from gymattendeceapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('mark/',views.markattendence),
+    path('markuserattendence/',views.markuserattendence),
+    
     path('register/',views.register),
-    path('dateindb/',views.adddateindb),
+
     path('registeruserdata/',views.registeruserdata),
 ]
