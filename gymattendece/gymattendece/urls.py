@@ -21,8 +21,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('mark/',views.markattendence),
     path('markuserattendence/',views.markuserattendence),
-    
+    path('allmember/',views.allmemberdisplayneartoexpier),
+    path('newentries/',views.newentries),
     path('register/',views.register),
+    path('expieredmembers/',views.expieredmembers),
 
     path('registeruserdata/',views.registeruserdata),
 ]

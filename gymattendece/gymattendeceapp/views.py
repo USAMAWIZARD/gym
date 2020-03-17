@@ -3,6 +3,8 @@ from .models import gym,attendence
 import datetime 
 from django.db import connection, transaction	
 import calendar
+from django.forms.models import model_to_dict
+from django.db.models import Q
 def markattendence(request):
 	return render(request,"markattendence.html")
 def register(request):
@@ -31,16 +33,14 @@ def registeruserdata(request):
 
 
 def markuserattendence(request):
+	#ifuserexist=attendence.objects.filter(date=).count()
 	ifdateexist=attendence.objects.filter(date=datetime.date.today().strftime("%Y-%m-%d")).count()
 	todaydate=datetime.date.today().strftime("%Y-%m-%d")
 	a=attendence()
-
-
 	try:
 		i=attendence.objects.get(date=todaydate)
 	except:
 		a.date=str(datetime.date.today().strftime("%Y-%m-%d"))
-		
 		a.status=request.POST["gymid"]	
 		a.save()
 		return redirect('/mark/')
@@ -48,4 +48,13 @@ def markuserattendence(request):
 	i.save()
 	return redirect("/mark/")
 	 
-	
+def allmemberdisplayneartoexpier(request):
+	return render(request,'adminalluser.html',{'gymuser':gym.objects.values_list().order_by('endingdate')})
+
+def newentries(request):
+	return render(request,'adminalluser.html',{'gymuser':gym.objects.values_list().order_by('-endingdate')})
+
+def expieredmembers(request):
+	today=str(datetime.date.today().strftime("%Y-%m-%d"))
+	return render(request,'adminalluser.html',{'gymuser':gym.objects.filter(endingdate__lte=today).values_list()})
+
