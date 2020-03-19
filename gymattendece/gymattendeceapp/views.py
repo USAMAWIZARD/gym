@@ -14,7 +14,11 @@ def register(request):
 	return render(request,"registeruser.html")
 
 def registeruserdata(request):
-	gy=gym()
+	if request.POST["membertype"]=="old":
+
+		gy=gym.objects.get(id=request.POST["idofalreadyexistmem"])
+	else:
+		gy=gym()
 	gy.name=request.POST["name"]
 	gy.age=request.POST["age"]
 	gy.phoneno=request.POST["number"]
@@ -30,6 +34,8 @@ def registeruserdata(request):
 	end=datetime.datetime.strptime(str(date_1 +datetime.timedelta(days=days_in_month)), '%Y-%m-%d').strftime('%Y-%m-%d')
 
 	gy.endingdate=end
+	
+
 	gy.save()
 	return render(request,"registeruser.html")
 
@@ -68,5 +74,7 @@ def getalreadyexistdata(request):
 	dictt["name"]=member.name
 	dictt["age"]=member.age
 	dictt["phoneno"]=member.phoneno
+	dictt["startindate"]=member.joiningdate
+	dictt["endingdate"]=member.endingdate
 
 	return  JsonResponse({'dictt': dictt})

@@ -48,7 +48,7 @@
                         </div>
                               
 
-                        <input type="text" onkeyup="setdataforalreadymember()" class="form-control" placeholder="Enter your Gym id" required="true" id="idofalreadyexistmember"  name="idofalreadyexistmem">
+                        <input type="text" onkeyup="setdataforalreadymember()" class="form-control" placeholder="Enter your Gym id" required="true" id="idofalreadyexistmember"  name="idofalreadyexistmem" value="1">
                         
                     </div>     
                     <div class="input-group form-group">
@@ -124,11 +124,11 @@ console.log(d.getMonth())
     function setidfield(){
 
        if(document.getElementById("newradio").checked==true){
-            document.getElementById("newinputfield").style.visibility="visible";
+            document.getElementById("newinputfield").style.visibility="hidden";
 
         } 
         else{
-            document.getElementById("newinputfield").style.visibility="hidden";
+            document.getElementById("newinputfield").style.visibility="visible";
 
         }
     }
@@ -191,6 +191,8 @@ console.log(d.getMonth())
             document.getElementsByName("name")[0].value=data[i].name 
             document.getElementsByName("number")[0].value=data[i].phoneno
             document.getElementsByName("age")[0].value=data[i].age
+            document.getElementsByName("enddate")[0].value=data[i].endingdate
+            document.getElementsByName("joiningdate")[0].value=data[i].startindate
           
         }
 
@@ -200,7 +202,9 @@ console.log(d.getMonth())
           {           
            document.getElementsByName("name")[0].value=""
             document.getElementsByName("number")[0].value=""
-            document.getElementsByName("age")[0].value=""
+            document.getElementsByName("age")[0].value=""   
+            document.getElementsByName("joiningdate")[0].value=""   
+            document.getElementsByName("enddate")[0].value=""   
          
           }  
            // type of the data sent and received
