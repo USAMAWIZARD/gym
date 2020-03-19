@@ -25,6 +25,6 @@ urlpatterns = [
     path('newentries/',views.newentries),
     path('register/',views.register),
     path('expieredmembers/',views.expieredmembers),
-
+    path('getalreadyexistdata/',views.getalreadyexistdata),
     path('registeruserdata/',views.registeruserdata),
 ]

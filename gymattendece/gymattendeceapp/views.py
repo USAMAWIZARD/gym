@@ -5,6 +5,9 @@ from django.db import connection, transaction
 import calendar
 from django.forms.models import model_to_dict
 from django.db.models import Q
+from django.shortcuts import render_to_response
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 def markattendence(request):
 	return render(request,"markattendence.html")
 def register(request):
@@ -58,3 +61,12 @@ def expieredmembers(request):
 	today=str(datetime.date.today().strftime("%Y-%m-%d"))
 	return render(request,'adminalluser.html',{'gymuser':gym.objects.filter(endingdate__lte=today).values_list()})
 
+def getalreadyexistdata(request):
+	dictt={}
+
+	member=gym.objects.get(id= request.POST['memid']);
+	dictt["name"]=member.name
+	dictt["age"]=member.age
+	dictt["phoneno"]=member.phoneno
+
+	return  JsonResponse({'dictt': dictt})

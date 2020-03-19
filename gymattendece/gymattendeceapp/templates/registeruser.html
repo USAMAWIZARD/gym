@@ -26,7 +26,7 @@
     <div class="d-flex justify-content-center h-100">
         <div class="card">
             <div class="card-header">
-                <h3>Register new member</h3>
+                <h3>Register  member</h3>
                 <div class="d-flex justify-content-end social_icon">
                     <span><i class="fab fa-facebook-square"></i></span>
                     <span><i class="fab fa-google-plus-square"></i></span>
@@ -35,11 +35,27 @@
             </div>
             <div class="card-body">
                 <form action="/registeruserdata/" method="POST">
+                        {% csrf_token %}
+                    <b>new member<b>
+                        <input type ="radio" id="newradio" name="membertype" onchange= "setidfield()" value="new">
+                        <br>
+                    Existing member
+                    <input type="radio" id="oldradio" value="old" name="membertype" onchange="setidfield()">
+
+                    <div class="input-group form-group" id="newinputfield" style="visibility:hidden;"> 
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                              
+
+                        <input type="text" onkeyup="setdataforalreadymember()" class="form-control" placeholder="Enter your Gym id" required="true" id="idofalreadyexistmember"  name="idofalreadyexistmem">
+                        
+                    </div>     
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" class="form-control" placeholder="name" required="true" name="name">
+                        <input type="text" class="form-control" placeholder="name" required="true"  onchange="setidfield()" name="name">
                         
                     </div>      
 
@@ -100,9 +116,26 @@ console.log(d.getMonth())
 
 
                         }
-                    </script>>
 
+                    </script>
+
+
+<script type="text/javascript">
+    function setidfield(){
+
+       if(document.getElementById("newradio").checked==true){
+            document.getElementById("newinputfield").style.visibility="visible";
+
+        } 
+        else{
+            document.getElementById("newinputfield").style.visibility="hidden";
+
+        }
+    }
+</script>
             <div class="input-group form-group">
+          
+
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                         </div>
@@ -112,10 +145,9 @@ console.log(d.getMonth())
                     </div>
             
                     
-                    <div class="form-group" >
                         {% csrf_token %}
                         <input type="submit" value="Register" class="btn float-right login_btn ">
-                    </div>
+                    
                 </form>
             </div>
             <div class="card-footer">
@@ -130,3 +162,53 @@ console.log(d.getMonth())
     </div>
 </div>
 </body>
+
+<script type="">   
+
+  function setdataforalreadymember(){
+    var id=document.getElementById("idofalreadyexistmember").value;
+ 
+         
+         $.ajax({
+          // URL for the controller function that fetches and prints the data of the selected phone from dropdown list
+           url : "/getalreadyexistdata/",
+           // method of getting data is POST..not GET..
+           method : "POST",
+           // Data got through input are sent to the server
+           data: {memid: id,
+           csrfmiddlewaretoken: '{{ csrf_token }}'},
+           dataType: "JSON",
+  
+           // if data is fetched successfully, this function will be executed
+           success:function(data){
+            // print the recieved data from server in the section called com_result in compare_phones view file
+            console.log(data)
+            //var data = $.parseJSON(data)
+           //   data=JSON.parse(dataType)
+           for (var i in data) {
+        
+            console.log(data[i].name +data[i].age +data[i].phoneno )
+            document.getElementsByName("name")[0].value=data[i].name 
+            document.getElementsByName("number")[0].value=data[i].phoneno
+            document.getElementsByName("age")[0].value=data[i].age
+          
+        }
+
+       
+         },
+          error:function(obj)
+          {           
+           document.getElementsByName("name")[0].value=""
+            document.getElementsByName("number")[0].value=""
+            document.getElementsByName("age")[0].value=""
+         
+          }  
+           // type of the data sent and received
+           
+         });
+         // end of AJAX request
+     
+  
+}
+
+</script>>
