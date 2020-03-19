@@ -42,6 +42,10 @@ def registeruserdata(request):
 
 
 def markuserattendence(request):
+	try:
+		gym.objects.get(id=request.POST["gymid"]) #if user exist
+	except:
+		return redirect("/mark/")
 	#ifuserexist=attendence.objects.filter(date=).count()
 	ifdateexist=attendence.objects.filter(date=datetime.date.today().strftime("%Y-%m-%d")).count()
 	todaydate=datetime.date.today().strftime("%Y-%m-%d")
