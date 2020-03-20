@@ -27,4 +27,5 @@ urlpatterns = [
     path('expieredmembers/',views.expieredmembers),
     path('getalreadyexistdata/',views.getalreadyexistdata),
     path('registeruserdata/',views.registeruserdata),
+    path('todaysattendence/',views.todaysattendence),
 ]

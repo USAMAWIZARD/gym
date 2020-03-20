@@ -62,14 +62,14 @@ def markuserattendence(request):
 	return redirect("/mark/")
 	 
 def allmemberdisplayneartoexpier(request):
-	return render(request,'adminalluser.html',{'gymuser':gym.objects.values_list().order_by('endingdate')})
+	return render(request,'adminalluser.html',{'gymuser':gym.objects.values_list().order_by('endingdate'),'todaysattendence':0})
 
 def newentries(request):
-	return render(request,'adminalluser.html',{'gymuser':gym.objects.values_list().order_by('-endingdate')})
+	return render(request,'adminalluser.html',{'gymuser':gym.objects.values_list().order_by('-endingdate'),'todaysattendence':0})
 
 def expieredmembers(request):
 	today=str(datetime.date.today().strftime("%Y-%m-%d"))
-	return render(request,'adminalluser.html',{'gymuser':gym.objects.filter(endingdate__lte=today).values_list()})
+	return render(request,'adminalluser.html',{'gymuser':gym.objects.filter(endingdate__lte=today).values_list(),'todaysattendence':0})
 
 def getalreadyexistdata(request):
 	dictt={}
@@ -82,3 +82,20 @@ def getalreadyexistdata(request):
 	dictt["endingdate"]=member.endingdate
 
 	return  JsonResponse({'dictt': dictt})
+def todaysattendence(request):
+	statuslist=[]
+	datelist=[]
+	date=attendence.objects.all().values_list('date')
+	status=attendence.objects.all().values_list('status')
+	for stat,dat in zip(status,date):
+		datelist.append(dat[0])
+		statuslist.append(len(str(stat[0]).split(",")))
+	print(datelist,statuslist)
+	datelist.reverse()
+	statuslist.reverse()
+	dictofdateattend = dict(zip(datelist,statuslist)) 
+
+	print(dictofdateattend)
+	return render(request,'adminalluser.html',{'dictofdateattend':dictofdateattend,'todaysattendence':1})
+
+ 
