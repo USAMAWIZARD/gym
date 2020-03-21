@@ -28,4 +28,5 @@ urlpatterns = [
     path('getalreadyexistdata/',views.getalreadyexistdata),
     path('registeruserdata/',views.registeruserdata),
     path('todaysattendence/',views.todaysattendence),
+    path('getstatusofdate/<str:viewdateattendece>',views.getstatusofdate),
 ]

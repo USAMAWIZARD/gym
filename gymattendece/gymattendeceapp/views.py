@@ -62,7 +62,8 @@ def markuserattendence(request):
 	return redirect("/mark/")
 	 
 def allmemberdisplayneartoexpier(request):
-	return render(request,'adminalluser.html',{'gymuser':gym.objects.values_list().order_by('endingdate'),'todaysattendence':0})
+	today=str(datetime.date.today().strftime("%Y-%m-%d"))
+	return render(request,'adminalluser.html',{'gymuser':gym.objects.filter(endingdate__gte=today).values_list().order_by('endingdate'),'todaysattendence':0})
 
 def newentries(request):
 	return render(request,'adminalluser.html',{'gymuser':gym.objects.values_list().order_by('-endingdate'),'todaysattendence':0})
@@ -78,7 +79,7 @@ def getalreadyexistdata(request):
 	dictt["name"]=member.name
 	dictt["age"]=member.age
 	dictt["phoneno"]=member.phoneno
-	dictt["startindate"]=member.joiningdate
+	dictt["startindate"]=member.joiningdaste
 	dictt["endingdate"]=member.endingdate
 
 	return  JsonResponse({'dictt': dictt})
@@ -88,7 +89,7 @@ def todaysattendence(request):
 	date=attendence.objects.all().values_list('date')
 	status=attendence.objects.all().values_list('status')
 	for stat,dat in zip(status,date):
-		datelist.append(dat[0])
+		datelist.append(str(dat[0]))
 		statuslist.append(len(str(stat[0]).split(",")))
 	print(datelist,statuslist)
 	datelist.reverse()
@@ -98,4 +99,14 @@ def todaysattendence(request):
 	print(dictofdateattend)
 	return render(request,'adminalluser.html',{'dictofdateattend':dictofdateattend,'todaysattendence':1})
 
- 
+
+
+		
+def getstatusofdate(request,viewdateattendece):
+	dictt={}
+	#dateofintrest=datetime.datetime.strptime(viewdateattendece, '%Y-%m-%d').strftime('%m/%d/%y')
+	attend=attendence.objects.get(date= viewdateattendece)
+	print(attend.status)
+	member=gym.objects.filter(id__in=str(attend.status).split(',')  ).values_list()
+
+	return render(request,'adminalluser.html',{'gymuser':member,'todaysattendence':0})

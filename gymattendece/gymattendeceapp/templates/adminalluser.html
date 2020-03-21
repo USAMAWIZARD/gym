@@ -73,7 +73,7 @@
           <li>
             <a href="/todaysattendence/">
               <i class="tim-icons icon-bell-55"></i>
-              <p>Today's Attendence</p>
+              <p>All time attendence</p>
             </a>
           </li>
           <li>
@@ -199,7 +199,7 @@
             {% if dictofdateattend %} 
 <table class="table table-hover">
   <thead>
-    <tr>
+    <tr >
       <th scope="col">date</th>
       <th scope="col">No of people </th>
     </tr>
@@ -209,12 +209,14 @@
 
 
 
+ 
+    <tr onclick="window.location.href='/getstatusofdate/{{ date }}'">
 
-    <tr>
-  
       <td>{{date}}</td>
+
+
       <td>{{noofpeople}}</td>
-  
+ 
     </tr>
 
 
@@ -223,6 +225,7 @@
 
 </tbody>
 </table>
+
 
             {% else %}       
               {% for gymuser in gymuser %}
